@@ -1,0 +1,12 @@
+ListLinePlot[tmEvolution[14348906999989999925927][[All,1,2]],Filling->Axis,ImageSize->300]
+
+
+ListLinePlot@Log[10,Abs@(Fourier[tmEvolution[14348906999989999925927][[All,1,2]]]//Chop)]
+
+
+ListPlot@Differences[Log[10,Abs@(Fourier[evolution[[All,1,2]]]//Chop)]]
+
+
+headFourier[rule_Integer]:=Abs@(Fourier[TuringMachine[{rule, 5, 3}, {4, {{}, 0}}, 500][[All,1,2]]]//Chop);
+devi[rule_Integer]:=StandardDeviation@Differences@Log[10,headFourier[rule]];
+ListPlot[Table[devi[rule],{rule,(2*3*5)^(3*5)-100000-10^10+25000,(2*3*5)^(3*5)-100000-10^10+50000,1}]]
