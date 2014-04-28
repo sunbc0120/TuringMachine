@@ -1,0 +1,13 @@
+tmEvolution[rule_Integer]:=TuringMachine[{rule,5,3},{4,{{},0}},1500];
+Row[ArrayPlot[#,PixelConstrained->1,ColorFunction->"SolarColors"]
+&/@Partition[tmEvolution[14348906999989999925927][[All,2]],300]]
+
+
+GraphPlot[
+	With[
+		{rules=MapIndexed[{First[#2],#[[1,2]],#[[2,#[[1,2]]]]}&,
+		TuringMachine[{14348906999989999925927,5,3},{4,{{},0}},1500]]},
+	Join[Rule@@@Partition[rules,2,1],
+	Flatten[Rule@@@Partition[#,2,1]&/@Last@Reap[Sow[#,#[[2]]]&/@rules],1]]
+	]
+]
